@@ -1,0 +1,17 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - plausibleAPIKey
+      - plausibleAPIURL
+    properties:
+      plausibleAPIKey:
+        type: string
+        description: The API Key of your Plausible account.
+      plausibleAPIURL:
+        type: string
+        description: The URL of your Plausible server, default to https://plausible.io/api/v2
+  commandFunction:
+    |-
+    (config) => ({ command: 'node', args: ['dist/index.js'], env: { PLAUSIBLE_API_URL: config.plausibleAPIURL, PLAUSIBLE_API_KEY: config.plausibleAPIKey } })
